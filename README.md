@@ -1,4 +1,4 @@
-# Setup GTK4, Windows, Clang
+# Setup GTK4, Windows, Clang, gtkmm4
 - [Step 1: Install MSYS2](Step1)
 - [Step 2: Install Clang Compiler](Step2)
 - [Step 3: Install GTK4](Step3)
@@ -6,7 +6,8 @@
 - [Step 5: Create a C++ Project](Step5)
 - [Step 6: Compile the Code](Step6)
 - [Step 7: Hide command line](Step7)
-- [Step 8: Add more error warnings](Step8)
+- [Step 8: Install gtkmm instead, source code and compile](Step8)
+- [Step 9: Add more error warnings](Step9)
 
 **<a name="Step1"></a>Step 1: Install MSYS2**
 
@@ -88,11 +89,39 @@ Run it.
 To hide the command line on start up.
 ``clang++ -o myapp main.cpp `pkg-config --cflags --libs gtk4` -mwindows``
 
-**<a name="Step8"></a>Step 8: Add more error warnings**
+**<a name="Step8"></a>Step 8: Install gtkmm instead, source code and compile**
+
+ `pacman -S mingw-w64-x86_64-gtkmm4`
+
+```cpp
+#include <gtkmm.h>
+
+class ExampleWindow : public Gtk::Window
+{
+public:
+    ExampleWindow();
+};
+
+ExampleWindow::ExampleWindow(){
+    set_title("Test Window");
+    set_default_size(600,400);
+}
+
+int main(int argc, char** argv)
+{
+    auto app = Gtk::Application::create("example");
+    return app->make_window_and_run<ExampleWindow>(argc, argv);
+}
+```
+
+And compile with
+
+ ``clang++ -o eaxamplewindow gtkmmexample.cpp `pkg-config --cflags --libs gtkmm-4.0` -mwindows``
+
+**<a name="Step9"></a>Step 9: Add more error warnings**
 
 ``clang++ -o myapp main.cpp `pkg-config --cflags --libs gtk4` -mwindows -Wall -Wextra -Werror -Wpedantic -Wconversion -Wformat -Wshadow -Wundef``
 
-From ChatGPT:
 - `-Wall`: Enables most commonly used compiler warnings.
 - `-Wextra`: Enables additional compiler warnings not covered by `-Wall`.
 - `-Werror`: Treats all warnings as errors, ensuring that your code compiles cleanly without any warnings.
