@@ -5,9 +5,9 @@
 - [Step 4: Install pkg-config](Step4)
 - [Step 5: Create a C++ Project](Step5)
 - [Step 6: Compile the Code](Step6)
-- [Step 7: Hide command line](Step7)
-- [Step 8: Install gtkmm instead, source code and compile](Step8)
-- [Step 9: Add more error warnings](Step9)
+- [Step 7: Hide the Command Line at Startup](Step7)
+- [Step 8: Install gtkmm Instead, Source Code and Compile](Step8)
+- [Step 9: Add More Error Warnings](Step9)
 
 **<a name="Step1"></a>Step 1: Install MSYS2**
 
@@ -84,12 +84,12 @@ int main(int argc, char **argv) {
 Which should result in `myapp.exe`.
 Run it.
 
-**<a name="Step7"></a>Step 7: Hide command line**
+**<a name="Step7"></a>Step 7: Hide the Command Line at Startup**
 
 To hide the command line on start up.
 ``clang++ -o myapp main.cpp `pkg-config --cflags --libs gtk4` -mwindows``
 
-**<a name="Step8"></a>Step 8: Install gtkmm instead, source code and compile**
+**<a name="Step8"></a>Step 8: Install gtkmm Instead, Source Code and Compile**
 
  `pacman -S mingw-w64-x86_64-gtkmm4`
 
@@ -116,9 +116,9 @@ int main(int argc, char** argv)
 
 And compile with
 
- ``clang++ -o eaxamplewindow gtkmmexample.cpp `pkg-config --cflags --libs gtkmm-4.0` -mwindows``
+ ``clang++ -o examplewindow gtkmmexample.cpp `pkg-config --cflags --libs gtkmm-4.0` -mwindows``
 
-**<a name="Step9"></a>Step 9: Add more error warnings**
+**<a name="Step9"></a>Step 9: Add More Error Warnings**
 
 ``clang++ -o myapp main.cpp `pkg-config --cflags --libs gtk4` -mwindows -Wall -Wextra -Werror -Wpedantic -Wconversion -Wformat -Wshadow -Wundef``
 
